@@ -14,5 +14,3 @@ ENV OPENAI_API_KEY=""
 ENV ANTHROPIC_API_KEY=""
 
 EXPOSE 8080
-
-CMD ["uv", "serve", "--host", "0.0.0.0", "--port", "8080"]
