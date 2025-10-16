@@ -27,4 +27,3 @@ OLLAMA_BASE_URL = ""
 
 [service.open-webui]
 port = 8080
-start = "uv serve --host 0.0.0.0 --port 8080"
