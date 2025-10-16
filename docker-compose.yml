@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    environment:
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
+      
+      # APIs
+      ENABLE_OPENAI: ${ENABLE_OPENAI:-false}
+      ENABLE_ANTHROPIC: ${ENABLE_ANTHROPIC:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-""}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-""}
+
+      # Tools
+      ENABLE_PIPELINES: ${ENABLE_PIPELINES:-false}
+      ENABLE_TTS: ${ENABLE_TTS:-false}
+      ENABLE_SPEECH: ${ENABLE_SPEECH:-false}
+
+      # OLLAMA
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-""}
+    depends_on:
+      - pipelines
+    networks:
+      - webui_net
+
+  pipelines:
+    image: ghcr.io/open-webui/pipelines:main
+    container_name: openwebui-pipelines
+    ports:
+      - "9099:9099"
+    volumes:
+      - pipelines_data:/app/pipelines
+    environment:
+      PIPELINES_URLS: ${PIPELINES_URLS:-""}
+    networks:
+      - webui_net
+
+volumes:
+  openwebui_data:
+  pipelines_data:
+
+networks:
+  webui_net:
+    driver: bridge

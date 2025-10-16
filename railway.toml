@@ -1,0 +1,30 @@
+# railway.toml - Template do Open WebUI para Railway
+
+[project]
+name = "open-webui"
+
+[build]
+dockerfilePath = "Dockerfile"
+context = "."
+
+[env]
+# Segurança
+WEBUI_SECRET_KEY = ""
+
+# APIs
+ENABLE_OPENAI = "false"
+ENABLE_ANTHROPIC = "false"
+OPENAI_API_KEY = ""
+ANTHROPIC_API_KEY = ""
+
+# Tools
+ENABLE_PIPELINES = "false"
+ENABLE_TTS = "false"
+ENABLE_SPEECH = "false"
+
+# Conexões externas
+OLLAMA_BASE_URL = ""
+
+[service.open-webui]
+port = 8080
+start = "uv serve --host 0.0.0.0 --port 8080"
