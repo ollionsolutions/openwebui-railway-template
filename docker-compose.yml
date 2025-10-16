@@ -16,6 +16,9 @@ services:
       ENABLE_ANTHROPIC: ${ENABLE_ANTHROPIC:-false}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-""}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-""}
+      
+      # Banco Supabase
+      DATABASE_URL: ${DATABASE_URL}
 
       # Tools
       ENABLE_PIPELINES: ${ENABLE_PIPELINES:-false}
